@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday - Enter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a3a6e 0%, #3a4a8c 30%, #5b4a9e 60%, #3a2a6e 100%);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .enter-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            padding: 60px 50px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #2a3a6e;
+            margin-bottom: 20px;
+        }
+
+        .cake-icon {
+            font-size: 5rem;
+            margin: 20px 0;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .press-hint {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #3a4a8c;
+            background: rgba(255,255,255,0.7);
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            margin-top: 20px;
+            letter-spacing: 2px;
+        }
+
+        .enter-key {
+            background: linear-gradient(135deg, #3a4a8c, #5b4a9e);
+            color: white;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            margin: 15px 0;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="enter-card">
+    <h1>Ready to celebrate?</h1>
+    <div class="cake-icon">🎂</div>
+    <div class="enter-key">⏎ ENTER</div>
+    <div class="press-hint">Press to begin the surprise✨🎁</div>
+    <footer>Your birthday moment awaits</footer>
+</div>
+
+<script>
+    let bgMusic = null;
+    
+    function initMusic() {
+        if (bgMusic) return;
+        // Use your local MP3 file - save "birthday-music.mp3" in the same folder
+        bgMusic = new Audio('birthday-music.mp3');
+        bgMusic.loop = true;
+        bgMusic.volume = 0.4;
+    }
+    
+    function startCelebration() {
+        initMusic();
+        
+        if (bgMusic) {
+            bgMusic.play().catch(e => console.log('Play error:', e));
+        }
+        
+        sessionStorage.setItem('musicPlaying', 'true');
+        window.location.href = 'bday.html';
+    }
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            startCelebration();
+        }
+    });
+    
+    document.body.addEventListener('click', () => {
+        startCelebration();
+    });
+</script>
+</body>
+</html>
